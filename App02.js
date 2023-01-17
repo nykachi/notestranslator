@@ -1,6 +1,5 @@
 /* ************                All Imports               **********/
 import * as Font from 'expo-font';
-//import * as SplashScreen from 'expo-splash-screen';
 import AddNote from './components/AddNote';
 import Notes from './components/Notes';
 import EditNote from './components/EditNote';
@@ -13,16 +12,52 @@ import LanguageSelectScreen from './screens/LanguageSelectScreen';
 import colors from './utils/colors';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import SavedScreen from './screens/SavedScreen';
-import SettingsScreen from './screens/SettingsScreen';
+import 'react-native-gesture-handler';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 
-//import Footer from './components/Footer';
-//import MainContainer from './navigation/MainContainer';
+const Tab = createBottomTabNavigator();
+
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen
+        name="Notes"
+        component={Notes}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: (props) => (
+            <Entypo name="home" size={props.size} color={props.color} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Saved"
+        component={SavedScreen}
+        options={{
+          tabBarLabel: 'Saved',
+          tabBarIcon: (props) => (
+            <Entypo name="star" size={props.size} color={props.color} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: (props) => (
+            <Ionicons name="settings" size={props.size} color={props.color} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
 
 /************         Stack navigator to move between screens                ***********/
-
-// SplashScreen.preventAutoHideAsync();
-
 const Stack = createNativeStackNavigator();
 
 //**************            Main App function              ***********/
@@ -63,11 +98,11 @@ export default function App() {
   }, []);
 
   //***************             Function to Submit new note             ***********/
-  function handleNote(newNote) {
+  function handleNote(noteValue = '') {
+    const newNote = noteValue || note;
     const newNotes = [newNote, ...notes];
     setNotes(newNotes);
     setNote('');
-    // ["monkey", "chicken"] ->  [{"text": "monkey", "date": "12/31 1:01pm"}, {"text": "chicken ", "date": "12/31 1:02pm"}]
 
     AsyncStorage.setItem('storedNotes', JSON.stringify(newNotes))
       .then(() => {
@@ -90,8 +125,6 @@ export default function App() {
     AsyncStorage.getItem('storedNotes')
       .then((data) => {
         if (data !== null) {
-          // console.log({ data });
-          // console.log(JSON.parse(data));
           setNotes(JSON.parse(data));
         }
       })
@@ -114,7 +147,7 @@ export default function App() {
         <Stack.Navigator>
           {/* **********           Notes Component Screen             ***********/}
           <Stack.Group>
-            <Stack.Screen name="Home / 홈">
+            <Stack.Screen name="Notes" component={TabNavigator}>
               {(props) => (
                 <Notes
                   {...props}
@@ -197,20 +230,6 @@ export default function App() {
               name="LanguageSelectScreen"
               component={LanguageSelectScreen}
             />
-          </Stack.Group>
-
-          {/* ***********            Add saved notes Component Screen              ***********/}
-          <Stack.Group>
-            <Stack.Screen name="SavedScreen">
-              {(props) => <SavedScreen />}
-            </Stack.Screen>
-          </Stack.Group>
-
-          {/* ***********            Add saved notes Component Screen              ***********/}
-          <Stack.Group>
-            <Stack.Screen name="SettingsScreen">
-              {(props) => <SettingsScreen />}
-            </Stack.Screen>
           </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>

@@ -9,10 +9,33 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@eva-design/eva": "^2.1.1",
+    "@expo/vector-icons": "^13.0.0",
+    "@react-native-async-storage/async-storage": "^1.17.11",
+    "@react-native-community/clipboard": "^1.5.1",
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/bottom-tabs": "^6.5.2",
+    "@react-navigation/native": "^6.1.0",
+    "@react-navigation/native-stack": "^6.9.5",
+    "@react-navigation/stack": "^6.3.10",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@ui-kitten/components": "^5.1.2",
+    "@ui-kitten/eva-icons": "^5.1.2",
+    "axios": "^1.2.1",
     "expo": "~47.0.8",
+    "expo-clipboard": "~4.0.1",
+    "expo-font": "^11.0.1",
+    "expo-speech": "^11.0.0",
+    "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
     "react": "18.1.0",
-    "react-native": "0.70.5"
+    "react-native": "0.70.5",
+    "react-native-gesture-handler": "^2.8.0",
+    "react-native-svg": "13.4.0",
+    "react-native-tts": "^4.1.0",
+    "react-native-uuid": "^2.0.1",
+    "react-navigation-header-buttons": "^10.0.0",
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

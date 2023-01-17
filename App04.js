@@ -1,6 +1,5 @@
 /* ************                All Imports               **********/
 import * as Font from 'expo-font';
-//import * as SplashScreen from 'expo-splash-screen';
 import AddNote from './components/AddNote';
 import Notes from './components/Notes';
 import EditNote from './components/EditNote';
@@ -13,16 +12,13 @@ import LanguageSelectScreen from './screens/LanguageSelectScreen';
 import colors from './utils/colors';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import SavedScreen from './screens/SavedScreen';
+import SavedScreen from './components/SavedScreen';
 import SettingsScreen from './screens/SettingsScreen';
 
 //import Footer from './components/Footer';
 //import MainContainer from './navigation/MainContainer';
 
 /************         Stack navigator to move between screens                ***********/
-
-// SplashScreen.preventAutoHideAsync();
-
 const Stack = createNativeStackNavigator();
 
 //**************            Main App function              ***********/
@@ -63,7 +59,8 @@ export default function App() {
   }, []);
 
   //***************             Function to Submit new note             ***********/
-  function handleNote(newNote) {
+  function handleNote(noteValue = '') {
+    const newNote = noteValue || note;
     const newNotes = [newNote, ...notes];
     setNotes(newNotes);
     setNote('');
@@ -114,7 +111,7 @@ export default function App() {
         <Stack.Navigator>
           {/* **********           Notes Component Screen             ***********/}
           <Stack.Group>
-            <Stack.Screen name="Home / 홈">
+            <Stack.Screen name="Notes">
               {(props) => (
                 <Notes
                   {...props}

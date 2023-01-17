@@ -114,7 +114,7 @@ export default function App() {
         <Stack.Navigator>
           {/* **********           Notes Component Screen             ***********/}
           <Stack.Group>
-            <Stack.Screen name="Home / 홈">
+            <Stack.Screen name="Notes">
               {(props) => (
                 <Notes
                   {...props}
