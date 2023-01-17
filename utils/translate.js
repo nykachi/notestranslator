@@ -5,8 +5,7 @@ export const translate = async (text, languageFrom, languageTo) => {
     url: 'https://nlp-translation.p.rapidapi.com/v1/translate',
     params: { text: text, to: languageTo, from: languageFrom },
     headers: {
-      'X-RapidAPI-Key': '384e7931f9msh831305c5778f11ap1cfe1fjsn69eb110f2195',
-      'X-RapidAPI-Host': 'nlp-translation.p.rapidapi.com',
+     
     },
   };
 
